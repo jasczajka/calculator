@@ -25,3 +25,8 @@ numberButtons.forEach(button => button.addEventListener('click', (e) => {
   //store the display value in a separate variable
   let displayValue = document.querySelector('#display').textContent;
 }));
+
+//add clear button functionality
+document.querySelector('#clear-button').addEventListener('click', ()=> {
+  document.querySelector('#display').textContent = '';
+});
