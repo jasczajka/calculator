@@ -12,25 +12,34 @@ body
 #calculator
 {
   display:grid;
-  grid-template: 1fr 4fr / 0,9fr;
+  justify-content: center;
+  padding: 3%;
+  grid-template: 1fr 4fr / 0.9fr;
   height: 70vh;
   width: 50vh;
   background-color: azure;
-  gap:5% 5%;
 }
 
 #display
 {
   background-color: bisque;
-  grid-row: 1/2;
+  padding: 3%;
 }
-
-.buttons
+#keyboard
+{
+  display:grid;
+  grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+  gap: 1%;
+}
+button
 {
   display:flex;
-  border-style: dashed;
+  border-style: solid;
+  border-color: #C6E2E9;
   background-color:grey;
   justify-content:  center;
   align-items: center;
+  font-size: large;
+  font-weight: bold;
   
 }
