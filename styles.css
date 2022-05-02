@@ -22,9 +22,18 @@ body
 
 #display
 {
+  display:flex;
+  gap: 5%;
   background-color: bisque;
-  padding: 3%;
+  padding:3%;
+  margin-bottom: 3%;
+  justify-content: flex-start;
 }
+#main-number
+{
+  align-items: flex-end;
+}
+
 #keyboard
 {
   display:grid;
@@ -41,5 +50,4 @@ button
   align-items: center;
   font-size: large;
   font-weight: bold;
-  
 }
