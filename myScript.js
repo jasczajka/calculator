@@ -20,11 +20,20 @@ function operate(operator, a, b){
 let operatorButtons = document.querySelectorAll('.operator-button');
 let numberButtons = document.querySelectorAll('.number-button');
 
-//add typing functionality to number buttons
+//add typing numbers functionality
 numberButtons.forEach(button => button.addEventListener('click', (e) => {
   document.querySelector('#display').textContent = document.querySelector('#display').textContent + e.target.textContent;
 }));
 
+//add decimal button functionality, check if there's already a decimal point 
+document.querySelector('#decimal-button').addEventListener('click', (e) => {
+  if(document.querySelector('#display').textContent.includes('.')){
+    return;
+  }
+  else{
+    document.querySelector('#display').textContent = document.querySelector('#display').textContent + e.target.textContent;
+  }
+});
 
 
 //operator naming
