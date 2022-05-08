@@ -82,6 +82,7 @@ document.querySelector('#clear-button').addEventListener('click', () =>{
 };
 
 function clearCalculator(){
+  //if an operation has not yet begun, just clear display and reset color of buttons
   document.querySelector('#display').textContent = '';
   document.querySelectorAll('button').forEach(button => button.style.backgroundColor = 'grey');
 };
