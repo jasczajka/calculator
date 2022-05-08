@@ -62,7 +62,12 @@ function makeOperation(e){
     let result = String(Math.round(operate(operation,x,y)*10000)/10000)
     console.log(result);
     //display is now the result of operator
-    document.querySelector('#display').textContent = String(Math.round(operate(operation,x,y)*10000)/10000);
+    if (operation == divide && y == 0){
+      document.querySelector('#display').textContent = "Naaah man";
+    }
+    else{
+      document.querySelector('#display').textContent = String(Math.round(operate(operation,x,y)*10000)/10000);
+    }
     //reset operator button color
     e.target.style.backgroundColor = 'grey';
     //remove the listeners so we can wait for another operation
