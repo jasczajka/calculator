@@ -25,11 +25,7 @@ numberButtons.forEach(button => button.addEventListener('click', (e) => {
   document.querySelector('#display').textContent = document.querySelector('#display').textContent + e.target.textContent;
 }));
 
-//add clear button functionality
-document.querySelector('#clear-button').addEventListener('click', ()=> {
-  document.querySelector('#display').textContent = '';
-  operatorButtons.forEach(button => button.style.backgroundColor = 'grey');
-});
+
 
 //operator naming
 let operators = {
@@ -39,30 +35,56 @@ let operators = {
   '/':divide,
 }
 
-//when an operator is clicked, store the first number and wait for the second
-// and change color of the operator so user knows which one he is using
-
-operatorButtons.forEach(button => button.addEventListener('click', (e) => {
-  let operation = operators[e.target.textContent];
-  e.target.style.backgroundColor = "#dcdcdc";
-  //1.store the main number as the first number for operation 
+operatorButtons.forEach(button => button.addEventListener('click', makeOperation));
+function makeOperation(e){
+  //get the first number for operation
   let firstNumber = document.querySelector('#display').textContent;
-  //2.clear display
+  //empty display so the second number can be entered
   document.querySelector('#display').textContent = '';
-  //3. when = is pressed, operate on the numbers and use the operator
-  
+  //which operation to make
+  let operation = operators[e.target.textContent];
+  //temporarily remove functionality so the operation can be finished before next one
+  operatorButtons.forEach(button => button.removeEventListener('click',makeOperation));
+  //highlight which operation is currently being made
+  e.target.style.backgroundColor = "#dcdcdc";
+  //function triggers if operator or equals is clicked after clicking an operator
   function equalsFunction(){
+    //get first number from before clicking the operator first time
     let x = Number(firstNumber);
+    //get the second number from display
     let y = Number(document.querySelector('#display').textContent);
-    document.querySelector('#display').textContent = '';
-    document.querySelector('#display').textContent = String(operate(operation, x, y));
-    operatorButtons.forEach(button => button.style.backgroundColor = 'grey');
+    console.log(operation);
+    console.log(x);
+    console.log(y);
+    let result = String(Math.round(operate(operation,x,y)*10000)/10000)
+    console.log(result);
+    //display is now the result of operator
+    document.querySelector('#display').textContent = String(Math.round(operate(operation,x,y)*10000)/10000);
+    //reset operator button color
+    e.target.style.backgroundColor = 'grey';
+    //remove the listeners so we can wait for another operation
     document.querySelector('#equals-button').removeEventListener('click',equalsFunction);
-    };
-  document.querySelector('#equals-button').addEventListener('click', equalsFunction)
-   
+    operatorButtons.forEach(button => button.removeEventListener('click',equalsFunction));
+    
+  };
 
-}));
+  //add functionality of finishing an operation back
+  document.querySelector('#equals-button').addEventListener('click', equalsFunction);
+  operatorButtons.forEach(button => button.addEventListener('click', equalsFunction));
+  //add functionality of beginning an operation back
+  operatorButtons.forEach(button => button.addEventListener('click', makeOperation));
 
-//when operator is clicked, store main number as first, clear main
-//when = is pressed, a=first b=main operator = text content of operator button 
+  
+};
+
+//add clear button functionality
+// function clearCalculator(){
+//   document.querySelector('#display').textContent = '';
+//   document.querySelectorAll('button').forEach(button => button.style.backgroundColor = 'grey');
+//   //if an operation has begun, reset the functionality 
+//   document.querySelector('#equals-button').removeEventListener('click',makeOperation);
+//   operatorButtons.forEach(button => button.removeEventListener('click',makeOperation));
+//   document.querySelector('#equals-button').addEventListener('click',makeOperation);
+//   operatorButtons.forEach(button => button.addEventListener('click',makeOperation));
+// };
+// document.querySelector('#clear-button').addEventListener('click',clearCalculator);
