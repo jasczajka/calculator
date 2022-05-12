@@ -35,6 +35,11 @@ document.querySelector('#decimal-button').addEventListener('click', (e) => {
   }
 });
 
+//add backspace functionality
+document.querySelector('#backspace-button').addEventListener('click', () =>{
+  document.querySelector('#display').textContent = document.querySelector('#display').textContent.slice(0, -1);
+  
+});
 
 //operator naming
 let operators = {
