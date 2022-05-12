@@ -24,6 +24,12 @@ let numberButtons = document.querySelectorAll('.number-button');
 numberButtons.forEach(button => button.addEventListener('click', (e) => {
   document.querySelector('#display').textContent = document.querySelector('#display').textContent + e.target.textContent;
 }));
+document.addEventListener('keydown', logKey);
+
+function logKey(e) {
+  if (e.keyCode >= 48 && e.keyCode <= 57){
+  document.querySelector('#display').textContent += String(e.key);
+}};
 
 //add decimal button functionality, check if there's already a decimal point 
 document.querySelector('#decimal-button').addEventListener('click', (e) => {
@@ -76,6 +82,7 @@ function makeOperation(e){
     let result = String(Math.round(operate(operation,x,y)*10000)/10000)
     console.log(result);
     //display is now the result of operator
+    //division by 0 is not possible
     if (operation == divide && y == 0){
       document.querySelector('#display').textContent = "Naaah man";
     }
@@ -93,11 +100,11 @@ function makeOperation(e){
   operatorButtons.forEach(button => button.addEventListener('click', equalsFunction));
   //add functionality of beginning an operation back
   operatorButtons.forEach(button => button.addEventListener('click', makeOperation));
-//if makeOperation already triggered and we want to use the clear button, we need to remove the equalsFunction operator
-document.querySelector('#clear-button').addEventListener('click', () =>{
-  document.querySelector('#equals-button').removeEventListener('click', equalsFunction);
-  operatorButtons.forEach(button => button.removeEventListener('click', equalsFunction));
-});  
+  //if makeOperation already triggered and we want to use the clear button, we need to remove the equalsFunction operator, it will be added again when new operator is clicked
+  document.querySelector('#clear-button').addEventListener('click', () =>{
+    document.querySelector('#equals-button').removeEventListener('click', equalsFunction);
+    operatorButtons.forEach(button => button.removeEventListener('click', equalsFunction));
+  });  
 };
 
 function clearCalculator(){
