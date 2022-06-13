@@ -90,7 +90,7 @@ function makeOperation(e){
       document.querySelector('#display').textContent = String(Math.round(operate(operation,x,y)*10000)/10000);
     }
     //reset operator button color
-    e.target.style.backgroundColor = 'grey';
+    e.target.style.backgroundColor = '#EDEAE5';
     //remove the listeners so we can wait for another operation
     document.querySelector('#equals-button').removeEventListener('click',equalsFunction);
     operatorButtons.forEach(button => button.removeEventListener('click',equalsFunction));
@@ -110,6 +110,9 @@ function makeOperation(e){
 function clearCalculator(){
   //if an operation has not yet begun, just clear display and reset color of buttons
   document.querySelector('#display').textContent = '';
-  document.querySelectorAll('button').forEach(button => button.style.backgroundColor = 'grey');
+  document.querySelectorAll('#operator-button').forEach(button => button.style.backgroundColor = '#EDEAE5');
+  document.querySelectorAll('#clear-button').forEach(button => button.style.backgroundColor = '#957DAD');
+  document.querySelectorAll('#backspace-button').forEach(button => button.style.backgroundColor = '#957DAD');
+  document.querySelectorAll('#equals-button').forEach(button => button.style.backgroundColor = '#BFAEA1');
 };
 document.querySelector('#clear-button').addEventListener('click',clearCalculator);
